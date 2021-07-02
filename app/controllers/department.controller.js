@@ -1,15 +1,20 @@
 const Department = require('../models/department.model');
 
 // Create and Save a new Note
-const createDepartment = (name, description) => {
+const createDepartment = async (name, description) => {
 
     const dep = new Department({
         departmentName : name || 'saxeli',
         departmentDescription : description 
     });
 
-    return dep;
-    
+    try {
+        const department = await dep.save();
+        return dep;
+    } catch(err) {
+        throw err;
+    }
+
 };
 
 // Retrieve and return all notes from the database.
@@ -25,8 +30,8 @@ const findDepartment = (req, res) => {
 
 
 // Delete a note with the specified noteId in the request
-const deleteDepartment = (req, res) => {
-
+const deleteDepartment = async (id) => {
+    Department.findByIdAndRemove(id);
 };
 
 module.exports = {

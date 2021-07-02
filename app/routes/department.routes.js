@@ -6,6 +6,7 @@ const department = require('../controllers/department.controller');
 router.post('/department', async (req, res) => {
 
     const { depName, depDescription } = req.body;
+    console.log(depName + ' ' +depDescription )
     const result = await department.createDepartment(depName, depDescription);
     res.status(200).send({ result });
 
@@ -23,7 +24,9 @@ router.get('/department', async (req, res) => {
 
 // Delete a department with ID
 router.delete('/department/:depID', async (req, res) => {
-   
+   const id = req.params.depID;
+   const result = await department.deleteDepartment(id);
+   res.status(200).send( { result } );
 });
 
 module.exports = router;

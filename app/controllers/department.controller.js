@@ -2,13 +2,11 @@ const Department = require('../models/department.model');
 
 // Create and Save a new Note
 const createDepartment = async (name, description) => {
-    console.log(name + ' ------ ' + ' description ' + description)
+
     const dep = new Department({
         departmentName : name,
-        departmentDescription : description 
+        departmentDescription : description, 
     });
-
-    console.log(dep);
 
     try {
         const department = await dep.save();

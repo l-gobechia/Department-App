@@ -30,8 +30,9 @@ router.get('/department/:departmentID/employee', async (req, res) => {
 router.delete('/employee/:employeeID', async (req, res) => {
 
     try {
-        const { id, } = req.params.employeeID;
-        const result = await employee.deleteEmployee(id);
+        const { employeeID } = req.params;
+        console.log(employeeID + ' @@@@@@@')
+        const result = await employee.deleteEmployee(employeeID);
         res.status(204).send();
     } catch(err) {
         throw err;

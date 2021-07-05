@@ -30,10 +30,14 @@ router.get('/department', async (req, res) => {
 
 // Delete a department with ID
 router.delete('/department/:depID', async (req, res) => {
-
-   const id = req.params.depID;
-   const result = await department.deleteDepartment(id);
-   res.status(204).send();
+   try {
+    const id = req.params.depID;
+    await department.deleteDepartment(id);
+    res.status(204).send();     
+   } catch (error) {
+       res.status(error.statusCode).send( {errorMesseage : error.description} );
+   }
+  
 
 });
 

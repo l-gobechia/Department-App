@@ -1,4 +1,5 @@
 const Department = require('../models/department.model');
+const employee = require('./employee.controller');
 
 // Create and Save a new Note
 const createDepartment = async (name, description) => {
@@ -31,8 +32,24 @@ const getDepartments = async () => {
 
 // Delete a note with the specified noteId in the request
 const deleteDepartment = async (id) => {
-    const dep = await Department.findByIdAndRemove(id);
-    return dep;
+    try {
+        const employeeList = await employee.getEmploye( {departmentID: id} );
+        console.log(employeeList.length + ' @@@@@@@@@');
+        if (employeeList.length == 0) {
+            const dep = await Department.findByIdAndRemove(id);
+            return dep;
+        } else {
+            throw {
+                description: 'To delete Department there must not be any employees avaiable',
+                statusCode: 409,
+            };
+        }
+     
+    } catch(err) {
+        throw err;
+    }
+    
+
 };
 
 module.exports = {

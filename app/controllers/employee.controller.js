@@ -32,8 +32,14 @@ const getEmploye = async (departmentID) => {
 };
 
 const deleteEmployee = async (id) => {
-    const deleteEmploye = await EmployeeModel.findOneAndRemove(id);
-    return deleteEmploye;
+    
+    try {
+        const deleteEmploye = await EmployeeModel.findByIdAndRemove(id);
+        return deleteEmploye;
+    } catch(err) {
+        throw err;
+    }
+
 };
 
 module.exports = {

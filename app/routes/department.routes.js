@@ -1,21 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const department = require('../controllers/department.controller');
+const { departmentValidation } = require('../middleware/departmentValidation');
 
 // Create a new Department
-router.post('/department', async (req, res) => {
+router.post('/department', departmentValidation , async (req, res) => {
 
     const { depName, depDescription } = req.body;
-    const result = await department.createDepartment(depName, depDescription);
-    res.status(201).send({ result });
+    try {
+        const result = await department.createDepartment(depName, depDescription);
+        res.status(201).send( { result } );
+    } catch (err) {
+        if (err.statusCode && err.description){
+            res.status(err.statusCode).send( {errorMesseage : err.description} );
+        }
+        throw err;
+    };
+
 
 });
+
 
 // Retrive all Departments
 router.get('/department', async (req, res) => {
     const depList = await department.getDepartments();
    
-    res.status(200).send({ result: depList })
+    res.status(200).send( { result: depList } )
 });
 
 // Retrive a single department

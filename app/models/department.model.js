@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const DepartmentSchema = mongoose.Schema({
-    departmentName: String,
+    departmentName: {type: String, unique: true, },
     departmentDescription: String,
 }, {
     timestamps: true,

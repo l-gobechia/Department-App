@@ -5,15 +5,22 @@ const createDepartment = async (name, description) => {
 
     const dep = new Department({
         departmentName : name,
-        departmentDescription : description, 
+        departmentDescription : description || 'No Description', 
     });
 
     try {
         const department = await dep.save();
-        return dep;
+        return department;
     } catch(err) {
+        console.log(err.code);
+        if (err.code === 11000){
+            throw { 
+                description: 'This Department name already exists',
+                statusCode: 409,
+            }
+        }
         throw err;
-    }
+    };
 
 };
 
@@ -23,10 +30,11 @@ const getDepartments = async () => {
     return departmentList;
 };
 
-// Find a single note with a noteId
-const findDepartment = (req, res) => {
 
-};
+// Find a single note with a noteId
+// const findDepartment = (req, res) => {
+
+// };
 
 
 // Delete a note with the specified noteId in the request

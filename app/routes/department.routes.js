@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const department = require('../controllers/department.controller');
-const { departmentValidation } = require('../middleware/departmentValidation');
+const { departmentValidation } = require('../middleware/validations');
 
 // Create a new Department
 router.post('/department', departmentValidation , async (req, res) => {
@@ -27,9 +27,6 @@ router.get('/department', async (req, res) => {
    
     res.status(200).send( { result: depList } )
 });
-
-// Retrive a single department
-// router.get('/department/:depID', department.findDepartment);
 
 // Delete a department with ID
 router.delete('/department/:depID', async (req, res) => {

@@ -29,13 +29,6 @@ const getDepartments = async () => {
     return departmentList;
 };
 
-
-// Find a single note with a noteId
-// const findDepartment = (req, res) => {
-
-// };
-
-
 // Delete a note with the specified noteId in the request
 const deleteDepartment = async (id) => {
     const dep = await Department.findByIdAndRemove(id);

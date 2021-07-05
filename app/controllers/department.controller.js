@@ -12,7 +12,6 @@ const createDepartment = async (name, description) => {
         const department = await dep.save();
         return department;
     } catch(err) {
-        console.log(err.code);
         if (err.code === 11000){
             throw { 
                 description: 'This Department name already exists',

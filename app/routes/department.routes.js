@@ -11,7 +11,7 @@ router.post('/department', departmentValidation , async (req, res) => {
         const result = await department.createDepartment(depName, depDescription);
         res.status(201).send( { result } );
     } catch (err) {
-        if (err.statusCode && err.description){
+        if (err.statusCode && err.description) {
             res.status(err.statusCode).send( {errorMesseage : err.description} );
         }
         throw err;

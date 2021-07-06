@@ -7,35 +7,38 @@ const createEmployee = async (employeeData) => {
         employeeName,
         employeeEmail,
         employeeAge,
-        employeePosition
+        employeePosition,
     } = employeeData;
 
     const newEmployee = new EmployeeModel({
-        departmentID: departmentID,
-        employeeName: employeeName,
-        employeeEmail: employeeEmail || `${empName} does not have email`,
-        employeeAge: employeeAge,
-        employeePosition: employeePosition,  
+        departmentID,
+        employeeName,
+        employeeEmail,
+        employeeAge,
+        employeePosition,  
     });
 
     try {
-        const employee = await newEmployee.save();
-        return employee;
+        return await newEmployee.save();
     } catch(err) {
         throw err;
     }
 };
 
 const getEmploye = async (departmentID) => {
-    const employeeList = await EmployeeModel.find( departmentID );
-    return employeeList;
+
+    try {
+        return await EmployeeModel.find( departmentID );
+    } catch (err) {
+        throw err;
+    }
+
 };
 
 const deleteEmployee = async (id) => {
     
     try {
-        const deleteEmploye = await EmployeeModel.findByIdAndRemove(id);
-        return deleteEmploye;
+        return await EmployeeModel.findByIdAndRemove(id);
     } catch(err) {
         throw err;
     }

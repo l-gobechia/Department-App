@@ -26,30 +26,25 @@ const createDepartment = async (name, description) => {
 
 // Retrieve and return all notes from the database.
 const getDepartments = async () => {
-    const departmentList = await Department.find(); 
-    return departmentList;
+    return await Department.find(); 
 };
 
 // Delete a note with the specified noteId in the request
-const deleteDepartment = async (id) => {
+const deleteDepartment = async (departmentID) => {
+    
     try {
-        const employeeList = await employee.getEmploye( {departmentID: id} );
-        console.log(employeeList.length + ' @@@@@@@@@');
-        if (employeeList.length == 0) {
-            const dep = await Department.findByIdAndRemove(id);
-            return dep;
+        const employeeList = await employee.getEmploye( {departmentID: departmentID} );
+        if (!employeeList.length) {
+            return await Department.findByIdAndRemove(departmentID);
         } else {
             throw {
                 description: 'To delete Department there must not be any employees avaiable',
                 statusCode: 409,
             };
         }
-     
     } catch(err) {
         throw err;
     }
-    
-
 };
 
 module.exports = {

@@ -19,7 +19,7 @@ router.get('/department/:departmentID/employee', async (req, res) => {
 
     try {
         const { departmentID } = req.params;
-        const employeeList = await employee.getEmploye( {departmentID: departmentID} );
+        const employeeList = await employee.getEmploye( {departmentID} );
         res.status(200).send( {result: employeeList} );
     } catch(err) {
         throw err;
@@ -31,8 +31,7 @@ router.delete('/employee/:employeeID', async (req, res) => {
 
     try {
         const { employeeID } = req.params;
-        console.log(employeeID + ' @@@@@@@')
-        const result = await employee.deleteEmployee(employeeID);
+        await employee.deleteEmployee(employeeID);
         res.status(204).send();
     } catch(err) {
         throw err;

@@ -1,7 +1,7 @@
 const Department = require('../models/department.model');
 const employee = require('./employee.controller');
 
-// Create and Save a new Note
+// Create and Save a new Department
 const createDepartment = async (name, description) => {
 
     const dep = new Department({
@@ -10,8 +10,7 @@ const createDepartment = async (name, description) => {
     });
 
     try {
-        const department = await dep.save();
-        return department;
+        return await dep.save();
     } catch(err) {
         if (err.code === 11000){
             throw { 
@@ -24,17 +23,17 @@ const createDepartment = async (name, description) => {
 
 };
 
-// Retrieve and return all notes from the database.
+// Retrieve and return all Departments from the database.
 const getDepartments = async () => {
     return await Department.find(); 
 };
 
-// Delete a note with the specified noteId in the request
+// Delete a Department  with the specified departmentID in the request
 const deleteDepartment = async (departmentID) => {
-    
+ 
     try {
-        const employeeList = await employee.getEmploye( {departmentID: departmentID} );
-        if (!employeeList.length) {
+        const ifDepIDExists = await Department.findOne( {  _id: departmentID } ); 
+        if (ifDepIDExists) {
             return await Department.findByIdAndRemove(departmentID);
         } else {
             throw {

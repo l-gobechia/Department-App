@@ -10,11 +10,15 @@ router.post('/employee', employeeValidation, async (req, res) => {
         const result = await employee.createEmployee(req.body);
         res.status(201).send( {result} );
     } catch(err) {
-        throw err;
+        if (err.statusCode && err.description) {
+            res.status(err.statusCode).send( {errorMesseage : err.description } );
+        }
+        res.status(err.statusCode).send( {errorMesseage : err.description } );
     }
 
 });
 
+// Retrives new employee from specific department
 router.get('/department/:departmentID/employee', async (req, res) => {
 
     try {
@@ -22,13 +26,13 @@ router.get('/department/:departmentID/employee', async (req, res) => {
         const employeeList = await employee.getEmploye( {departmentID} );
         res.status(200).send( {result: employeeList} );
     } catch(err) {
-        throw err;
+        res.status(err.statusCode).send( {errorMesseage : err.description } );
     }
     
 });
 
+// Deletes employe with specific employee id
 router.delete('/employee/:employeeID', async (req, res) => {
-
     try {
         const { employeeID } = req.params;
         await employee.deleteEmployee(employeeID);

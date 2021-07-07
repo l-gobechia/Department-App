@@ -1,4 +1,5 @@
 const Department = require('../models/department.model');
+const Employee = require('../models/employee.model');
 const employee = require('./employee.controller');
 
 // Create and Save a new Department
@@ -32,8 +33,9 @@ const getDepartments = async () => {
 const deleteDepartment = async (departmentID) => {
  
     try {
-        const ifDepIDExists = await Department.findOne( {  _id: departmentID } ); 
-        if (ifDepIDExists) {
+        const ifDepIDIsEmpty = await Employee.findOne( {  departmentID } );
+        console.log('ifDepIDExists :>> ', ifDepIDIsEmpty);
+        if (!ifDepIDIsEmpty) {
             return await Department.findByIdAndRemove(departmentID);
         } else {
             throw {

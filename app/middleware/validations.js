@@ -19,7 +19,7 @@ const employeeValidation = (req, res, next) => {
     // checks if all variables are not empty and they dont contain whitespaces
     if ( employeeName && employeeName.trim().length && 
          employeeEmail && employeeEmail.trim().length &&
-         employeeAge && employeeAge.trim().length &&
+         employeeAge && employeeAge != NaN &&
          employeePosition && employeePosition.trim().length ) {
         
             let myNumberRegex = new RegExp(/[0-9]/g);

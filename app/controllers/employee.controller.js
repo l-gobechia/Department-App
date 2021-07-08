@@ -49,13 +49,6 @@ const createEmployee = async (employeeData) => {
 const getEmploye = async (departmentID) => {
     const depID = departmentID.departmentID;
     try {
-        const ifDepIDExists = await employeeModel.findOne( { departmentID: depID } ); 
-        if(!ifDepIDExists){
-               throw {
-                description: 'Such Department does not exists or it doesn not have employees',
-                statusCode: 404
-            }
-        }
         return await EmployeeModel.find( departmentID );
     } catch (err) {
         throw err;

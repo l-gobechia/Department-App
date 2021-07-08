@@ -34,7 +34,6 @@ const deleteDepartment = async (departmentID) => {
  
     try {
         const ifDepIDIsEmpty = await Employee.findOne( {  departmentID } );
-        console.log('ifDepIDExists :>> ', ifDepIDIsEmpty);
         if (!ifDepIDIsEmpty) {
             return await Department.findByIdAndRemove(departmentID);
         } else {

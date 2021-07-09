@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+require('dotenv').config();
+const port = process.env.PORT;
 const app = express();
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -38,6 +39,6 @@ const employee = require('./app/routes/employee.routes');
 app.use('/', department, employee);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });

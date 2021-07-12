@@ -1,13 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT;
-const app = express();
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
-
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 app.use(cors())
@@ -36,7 +34,8 @@ app.get('/', (req, res) => {
 // Require Notes routes
 const department = require('./app/routes/department.routes');
 const employee = require('./app/routes/employee.routes');
-app.use('/', department, employee);
+const user = require('./app/routes/auth.routes');
+app.use('/', department, employee, user);
 
 // listen for requests
 app.listen(port, () => {

@@ -1,6 +1,5 @@
 const EmployeeModel = require('../models/employee.model');
 const DepartmentModel = require('../models/department.model');
-const employeeModel = require('../models/employee.model');
 
 const createEmployee = async (employeeData) => {
 

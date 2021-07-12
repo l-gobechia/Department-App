@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const department = require('../controllers/department.controller');
 const { departmentValidation } = require('../middleware/validations');
+// const { passport } = require('../../node_modules/passport-http-bearer');
 
 // Create a new Department
 router.post('/department', departmentValidation , async (req, res) => {

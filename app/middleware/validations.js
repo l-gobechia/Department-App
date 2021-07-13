@@ -38,19 +38,36 @@ const employeeValidation = (req, res, next) => {
 
 };
 
+// const userEmailAndPasswordValidation = (req, res, next) => {
+
+//     const email = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+//     const pass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+//     if (req.body.userPassword.match(pass) && req.body.userEmail.match(email)) {
+//         next();
+//     } else if (req.body.userEmail.match(email) === null) {
+//         res.status(403).send( {error: 'Don\'t use empty space in email'} );
+//     } else {
+//          res.status(403).send( {error: 'Password must contain 6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter'} );
+//     }
+
+// };
+
+
 const userEmailAndPasswordValidation = (req, res, next) => {
 
     const email = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
     const pass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    if (req.body.userPassword.match(pass) && req.body.userEmail.match(email)) {
+    if (req.body.password.match(pass) && req.body.username.match(email)) {
+        console.log('validation passed @@@@@@@@@@@@@@');
         next();
-    } else if (req.body.userEmail.match(email) === null) {
-        res.status(403).send( {error: 'Don\'t use empty space in email'} );
+    } else if (req.body.username.match(email) === null) {
+        res.status(403).send( {error: 'This email format is not allowed'} );
     } else {
          res.status(403).send( {error: 'Password must contain 6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter'} );
     }
 
 };
+
 
 module.exports = {
     departmentValidation,

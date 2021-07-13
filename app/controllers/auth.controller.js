@@ -1,12 +1,36 @@
 const User = require('../models/user.model');
+const bcrypt = require('bcrypt');
 
-const registerUser = async (userEmail, userPassword) => {
+
+// const registerUser = async (userEmail, userPassword) => {
+//     const user = new User({
+//         userEmail: userEmail.trim(),
+//         userPassword,
+//     });
+
+//     try {
+//         // const hash = await bcrypt.hash(userPassword, 10);
+//         // user.userPassword = hash;
+//         return await user.save();
+//     } catch (err) {
+//         if (err.code == 11000) {
+//             throw { 
+//                 description: 'This User email already exists',
+//                 statusCode: 409,
+//             }
+//         }
+//         throw err;
+//     }
+// };
+const registerUser = async (username, password) => {
     const user = new User({
-        userEmail: userEmail.trim(),
-        userPassword,
+        username,
+        password,
     });
 
     try {
+        // const hash = await bcrypt.hash(userPassword, 10);
+        // user.userPassword = hash;
         return await user.save();
     } catch (err) {
         if (err.code == 11000) {
@@ -18,9 +42,13 @@ const registerUser = async (userEmail, userPassword) => {
         throw err;
     }
 };
-
 const getUsers = async () => {
-    return await User.find();
+    try {
+        return await User.find();
+    } catch (err) {
+        throw err;
+    }
+    
 };
 
 const deleteUser = async (userID) => {

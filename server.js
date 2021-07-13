@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('./passport');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
@@ -9,6 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 app.use(cors())
+
+// passportjs
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
@@ -34,8 +37,13 @@ app.get('/', (req, res) => {
 // Require Notes routes
 const department = require('./app/routes/department.routes');
 const employee = require('./app/routes/employee.routes');
-const user = require('./app/routes/auth.routes');
-app.use('/', department, employee, user);
+const auth = require('./app/routes/auth.routes');
+const user = require('./app/routes/user.route');
+const passport = require('passport');
+app.use('/', department, employee);
+app.use('/auth', auth);
+app.use('/user', passport.authenticate('jwt', { session: false } ), user);
+// app.use('/', passport.authenticate('jwt', { session: false } ), department);
 
 // listen for requests
 app.listen(port, () => {

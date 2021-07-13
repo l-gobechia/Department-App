@@ -22,6 +22,7 @@ const bcrypt = require('bcrypt');
 //         throw err;
 //     }
 // };
+
 const registerUser = async (username, password) => {
     const user = new User({
         username,

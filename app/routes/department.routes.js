@@ -18,7 +18,6 @@ router.post('/department', departmentValidation , async (req, res) => {
         throw err;
     };
 
-
 });
 
 

@@ -40,10 +40,10 @@ const employee = require('./app/routes/employee.routes');
 const auth = require('./app/routes/auth.routes');
 const user = require('./app/routes/user.route');
 const passport = require('passport');
-app.use('/', department, employee);
+// app.use('/', department, employee);
 app.use('/auth', auth);
 app.use('/user', passport.authenticate('jwt', { session: false } ), user);
-// app.use('/', passport.authenticate('jwt', { session: false } ), department);
+app.use('/', passport.authenticate('jwt', { session: false } ), department);
 
 // listen for requests
 app.listen(port, () => {

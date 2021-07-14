@@ -10,7 +10,6 @@ require('dotenv').config();
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
-        console.log(`@@@@@@@@@@@@@@@@@@@@@@@here test`);
         const user = await UserModel.findOne({ username });
      
         if (!user) {
@@ -19,7 +18,6 @@ passport.use(new LocalStrategy(
 
         // check user password need to be done
         if (user.password !== password) {
-            console.log(`@@@@@@@@@@@user.password !== password`);
           return done(null, false, { message: 'Incorrect password.' });
         }
         

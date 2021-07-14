@@ -1,6 +1,5 @@
 const Department = require('../models/department.model');
 const Employee = require('../models/employee.model');
-const employee = require('./employee.controller');
 
 // Create and Save a new Department
 const createDepartment = async (name, description) => {

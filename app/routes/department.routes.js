@@ -20,7 +20,6 @@ router.post('/department', departmentValidation , async (req, res) => {
 
 });
 
-
 // Retrive all Departments
 router.get('/department', async (req, res) => {
     const depList = await department.getDepartments();

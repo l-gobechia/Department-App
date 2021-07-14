@@ -25,7 +25,7 @@ const bcrypt = require('bcrypt');
 
 const registerUser = async (username, password) => {
     const user = new User({
-        username,
+        username: username.trim(),
         password,
     });
 

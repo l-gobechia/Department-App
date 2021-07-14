@@ -57,8 +57,8 @@ router.post('/login', (req, res, next) => {
             // console.log('user :>> ', user);
             try {
                 const token = jwt.sign({
-                    exp: Math.floor(Date.now() / 1000) + (60 * 1),
-                    data: JSON.stringify(user)}, 'your_jwt_secret'); 
+                    exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                    data: JSON.stringify(user)}, process.env.secretOrKey); 
                 // const token = jwt.sign(JSON.stringify(user), 'your_jwt_secret'); 
                 return res.json( {token} );
             } catch (err) {
